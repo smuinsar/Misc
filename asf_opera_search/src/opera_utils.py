@@ -42,6 +42,7 @@ def read_opera_cslc(hdf_path: str, polarization: str = 'VV') -> Tuple[np.ndarray
             'dimensions': h5[f'{PATHS["metadata"]}/shape'][:],
             'bounding_polygon': h5[f'{PATHS["id"]}/bounding_polygon'][()].decode(),
             'orbit_direction': h5[f'{PATHS["id"]}/orbit_pass_direction'][()].decode(),
+            'burst_id': h5[f'{PATHS["id"]}/burst_id'][()].decode(),
             'center_lon': h5[f'{PATHS["metadata"]}/center'][0],
             'center_lat': h5[f'{PATHS["metadata"]}/center'][1],
             'wavelength': h5[f'{PATHS["metadata"]}/wavelength'][()]
