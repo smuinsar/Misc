@@ -2,7 +2,7 @@ from typing import Dict, Tuple, Any
 import numpy as np
 import h5py
 
-def read_opera_cslc(hdf_path: str, polarization: str = 'VV') -> Tuple[np.ndarray, Dict[str, Any]]:
+def read_opera_cslc(hdf_path: str, polarization: str = 'VV', deramping_flag: bool = False) -> Tuple[np.ndarray, Dict[str, Any]]:
     """
     Read and process OPERA CSLC data from HDF file.
     
@@ -49,7 +49,8 @@ def read_opera_cslc(hdf_path: str, polarization: str = 'VV') -> Tuple[np.ndarray
         }
         
         # Process CSLC correction
-        phase_correction = np.exp(1j * (azimuth_phase + flatten_phase))
-        cslc_corrected = cslc * np.conj(phase_correction)
+        if deramping_flag:
+            phase_correction = np.exp(1j * (azimuth_phase + flatten_phase))
+            cslc = cslc * np.conj(phase_correction)
 
-    return cslc_corrected, parameters
+    return cslc, parameters
