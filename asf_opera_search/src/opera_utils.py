@@ -26,8 +26,6 @@ def read_opera_cslc(hdf_path: str, polarization: str = 'VV', deramping_flag: boo
     with h5py.File(hdf_path, 'r') as h5:
         # Read all data
         cslc = h5[f'{PATHS["grid"]}/{polarization}'][:]
-        azimuth_phase = h5[f'{PATHS["grid"]}/azimuth_carrier_phase'][:]
-        flatten_phase = h5[f'{PATHS["grid"]}/flattening_phase'][:]
         
         # Create flat dictionary of all parameters
         parameters = {
@@ -51,6 +49,8 @@ def read_opera_cslc(hdf_path: str, polarization: str = 'VV', deramping_flag: boo
         
         # Process CSLC correction
         if deramping_flag:
+            azimuth_phase = h5[f'{PATHS["grid"]}/azimuth_carrier_phase'][:]
+            flatten_phase = h5[f'{PATHS["grid"]}/flattening_phase'][:]
             phase_correction = np.exp(1j * (azimuth_phase + flatten_phase))
             cslc = cslc * np.conj(phase_correction)
 
