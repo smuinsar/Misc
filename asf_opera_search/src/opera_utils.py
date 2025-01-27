@@ -9,6 +9,7 @@ def read_opera_cslc(hdf_path: str, polarization: str = 'VV', deramping_flag: boo
     Args:
         hdf_path (str): Path to the HDF file
         polarization (str): Polarization type to read
+        deramping_flag (bool): Flag to apply deramping correction
         
     Returns:
         Tuple containing:
