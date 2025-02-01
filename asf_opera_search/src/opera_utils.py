@@ -29,8 +29,6 @@ def read_opera_cslc(hdf_path: str, polarization: str = 'VV', deramping_flag: boo
         
         # Create flat dictionary of all parameters
         parameters = {
-            'azimuth_phase': azimuth_phase,
-            'flatten_phase': flatten_phase,
             'x_coordinates': h5[f'{PATHS["grid"]}/x_coordinates'][:],
             'y_coordinates': h5[f'{PATHS["grid"]}/y_coordinates'][:],
             'x_spacing': int(h5[f'{PATHS["grid"]}/x_spacing'][()]),
